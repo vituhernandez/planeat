@@ -14,6 +14,7 @@ A documentação do PlanEat foi modularizada em documentos dedicados para cada p
 
 | Módulo | Documento de Referência | Descrição |
 | :--- | :--- | :--- |
+| 📅 **Planejamento & Sprints** | [`docs/planning.md`](/docs/planning.md) | Cronograma por sprints paralelo e desacoplado entre os 2 times (Banco+Back e Front+Pitch). |
 | 🗄️ **Banco de Dados** | [`docs/banco.md`](/docs/banco.md) | Diagrama ER, dicionário de dados, script DDL/DML (`script.sql`) e consultas analíticas. |
 | ☕ **Back-end Java** | [`docs/backend.md`](/docs/backend.md) | Arquitetura em camadas, POO, Diagrama de Classes UML, persistência JDBC nativa e regras de negócio. |
 | ⚛️ **Front-end React** | [`docs/frontend.md`](/docs/frontend.md) | SPA em React, componentes, rotas, checklist tátil para compras e integração com a API. |
@@ -166,27 +167,3 @@ Single Page Application (SPA) desenvolvida em React com Vite e React Router, con
 | **Diferencial: Web Conectada** | Interface web lendo e gravando no banco via back-end. | Front-end em React consome endpoints REST Java via `fetch`/`axios`, gravando e lendo dados reais do banco relacional. |
 | **Diferencial: Relatório SQL** | Consultas com `JOIN` e agregação gerando inteligência. | Query analítica agregando insumos por categoria e somando quantidades para a lista cirúrgica. |
 | **Vídeo Pitch** | Até 3 minutos, foco no protótipo e problema real. | Roteiro estruturado demonstrando a dor (desperdício), o sistema funcionando, o banco de dados e o impacto social (ODS 2 e 11). |
-
----
-
-## 7. Plano de Ação e Checklist de Entrega
-
-- [ ] **Fase 1: Banco de Dados** ([`docs/banco.md`](/docs/banco.md))
-  - [ ] Executar script `script.sql` com DDL completo (tabelas, constraints, sequences/identity);
-  - [ ] Executar inserts de carga inicial com dados de teste;
-  - [ ] Exportar Diagrama Entidade-Relacionamento (DER) em imagem/PDF.
-- [ ] **Fase 2: Back-end Java** ([`docs/backend.md`](/docs/backend.md))
-  - [ ] Configurar conexão JDBC com `ConnectionFactory`;
-  - [ ] Implementar classes de domínio (`model`) com encapsulamento e herança;
-  - [ ] Implementar DAOs com CRUD completo e query analítica de consolidação;
-  - [ ] Criar Services com validações de negócio e algoritmo de consolidação;
-  - [ ] Configurar servidor HTTP REST em JSON.
-- [ ] **Fase 3: Front-end Web (React)** ([`docs/frontend.md`](/docs/frontend.md))
-  - [ ] Inicializar projeto React (Vite) estruturado com componentes modulares e roteamento (React Router);
-  - [ ] Implementar as visões principais: Dashboard, Gestão de Receitas (CRUD) e Planejamento/Lista de Compras;
-  - [ ] Desenvolver estilo visual responsivo focado no uso prático em smartphones;
-  - [ ] Implementar camada de serviços/API (`fetch` ou `axios`) para integração e persistência de dados em tempo real no back-end Java.
-- [ ] **Fase 4: Validação & Pitch**
-  - [ ] Validar fluxo de ponta a ponta: Cadastro de Receita -> Montagem do Cardápio -> Geração da Lista -> Marcação no Supermercado;
-  - [ ] Gravar o vídeo pitch demonstrando o sistema em execução (máximo 3 minutos);
-  - [ ] Montar `README.md` detalhado e arquivo `.txt` com os nomes, RMs e link público do vídeo.

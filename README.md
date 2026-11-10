@@ -68,6 +68,7 @@ planeat/
 │           └── api.js              # Funções base de integração HTTP (a implementar pelo time)
 │
 └── 📚 docs/                        # Guias e especificações de referência
+    ├── planning.md                 # Planejamento mensal desacoplado (2 times paralelos)
     ├── spec.md                     # Visão geral, arquitetura e critérios da GS
     ├── banco.md                    # DER detalhado, tipos de dados e queries analíticas
     ├── backend.md                  # Diagrama de Classes UML e contratos REST
