@@ -178,3 +178,11 @@ npm run dev
 
 # A aplicação estará disponível em http://localhost:5173
 ```
+
+### Implementação neste repositório
+
+As telas estão disponíveis nas rotas `/`, `/receitas` e `/planejamento`. A navegação usa React Router; o menu permanece no cabeçalho em todas as telas. O script `npm run build` gera a versão de produção.
+
+O serviço HTTP fica centralizado em `src/services/api.js`. Em desenvolvimento, as chamadas usam `/api` e o Vite as encaminha para `http://localhost:8080`. Para outra instalação, configure `VITE_API_BASE_URL` no ambiente do Vite. Se o back-end exigir o vínculo com um usuário, configure o identificador fornecido pelo próprio sistema em `VITE_USUARIO_ID`; não use um ID fictício.
+
+O front-end consome o contrato REST descrito em `docs/backend.md`. O boilerplate Java atual ainda não inicializa um servidor HTTP e os DAOs de planejamento permanecem como TODO; nesse estado, a interface apresenta a falha de conexão/servidor e não substitui a resposta por dados de demonstração. O contrato não descreve rotas de autenticação ou cadastro de ingredientes, portanto esses fluxos dependem de endpoints implementados no back-end.

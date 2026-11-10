@@ -1,11 +1,11 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer class="border-t border-slate-200 py-4 text-center text-xs text-slate-500 mt-auto bg-white">
-      <div class="max-w-5xl mx-auto px-4">
-        <p>PlanEat — CitizenTech FIAP (Global Solution 2026/2)</p>
-      </div>
+    <footer className="site-footer">
+      <Link className="footer-brand" to="/">planeat<span>.</span></Link>
+      <p>Planejar melhor é cuidar do que importa.</p>
+      <span className="footer-ods">ODS 2 <i>·</i> ODS 11</span>
     </footer>
   );
 }
