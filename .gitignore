@@ -1,2 +1,15 @@
 *:Zone.Identifier
 *Zone.Identifier*
+
+# Frontend dependencies
+frontend/node_modules/
+
+# Backend build output (Maven)
+backend/target/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
