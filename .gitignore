@@ -1,2 +1,5 @@
 *:Zone.Identifier
 *Zone.Identifier*
+
+# Frontend dependencies
+frontend/node_modules/
