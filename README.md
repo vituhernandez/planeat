@@ -1,31 +1,23 @@
-# 🌿 PlanEat — CitizenTech (Boilerplate)
+# 🌿 PlanEat — CitizenTech
 
 > **FIAP — Global Solution 2026/2**  
 > **Curso:** Engenharia de Software — 2º Ano  
 > **Tema:** CitizenTech — Tecnologia com o cidadão no centro da inovação  
 > **Objetivos de Desenvolvimento Sustentável:** ODS 2 e ODS 11  
 
----
-
-## 🎯 Sobre o Boilerplate
-
-Este repositório contém a **estrutura inicial (esqueleto) do projeto**, sem regras de negócio ou telas pré-implementadas. A arquitetura, padrões e separação de camadas estão configuradas para que o time desenvolva as funcionalidades manualmente, seguindo as documentações técnicas da pasta `docs/`.
-
----
-
 ## 📁 Estrutura do Projeto
 
 ```
 planeat/
 ├── 🗄️ database/
-│   └── script.sql                  # Esqueleto para DDL (tabelas, constraints) e DML (inserts)
+│   └── script.sql                  # DDL (tabelas, constraints) e DML (inserts)
 │
 ├── ☕ backend/
 │   ├── pom.xml                     # Maven com Java 17, drivers JDBC (Oracle, Postgres, H2) e Gson
 │   └── src/main/java/br/com/fiap/planeat/
 │       ├── Main.java               # Ponto de entrada da aplicação
 │       ├── factory/
-│       │   └── ConnectionFactory.java       # Template para conexão JDBC nativa
+│       │   └── ConnectionFactory.java       # Conexão JDBC
 │       ├── model/                  # Entidades de domínio com herança de EntidadeBase
 │       │   ├── EntidadeBase.java
 │       │   ├── Usuario.java
@@ -36,12 +28,12 @@ planeat/
 │       │   ├── PlanejamentoSemanal.java
 │       │   ├── ItemPlanejamento.java
 │       │   └── ItemListaCompras.java
-│       ├── dao/                    # Assinaturas dos métodos CRUD (a implementar pelo time)
+│       ├── dao/                    # Assinaturas dos métodos CRUD
 │       │   ├── UsuarioDAO.java
 │       │   ├── IngredienteDAO.java
 │       │   ├── ReceitaDAO.java
 │       │   └── PlanejamentoDAO.java
-│       ├── service/                # Assinaturas dos serviços de negócio (a implementar pelo time)
+│       ├── service/                # Assinaturas dos serviços de negócio
 │       │   ├── ReceitaService.java
 │       │   └── ListaComprasService.java
 │       └── exception/              # Hierarquia de exceções customizadas
@@ -65,7 +57,7 @@ planeat/
 │       │   ├── Receitas.jsx
 │       │   └── Planejamento.jsx
 │       └── services/
-│           └── api.js              # Funções base de integração HTTP (a implementar pelo time)
+│           └── api.js              # Funções base de integração HTTP
 │
 └── 📚 docs/                        # Guias e especificações de referência
     ├── planning.md                 # Planejamento mensal desacoplado (2 times paralelos)
