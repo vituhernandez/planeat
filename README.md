@@ -87,10 +87,10 @@ planeat/
   cd backend
   mvn clean test
   ```
-* Para iniciar o servidor (após configurar o banco e aplicar o schema/migrações):
-  ```powershell
-  $env:COOKIE_SECURE = "false"
-  mvn exec:java
+* Para iniciar o servidor (as configurações de banco e ambiente são lidas automaticamente do arquivo `backend/.env`):
+  ```bash
+  cd backend
+  mvn clean compile exec:java
   ```
 
 ### 3. Front-end React
@@ -113,3 +113,21 @@ planeat/
 Todos os endpoints de receitas, planejamentos, listas, ingredientes e categorias exigem uma sessão válida. O proprietário dos dados é obtido exclusivamente da sessão validada no Java; IDs de usuário enviados pelo cliente são ignorados. Contas antigas com hash incompatível precisam redefinir a senha antes do primeiro acesso.
 
 As requisições que alteram dados também exigem o cabeçalho `X-Requested-With: XMLHttpRequest`; a origem do navegador deve estar em `CORS_ALLOWED_ORIGINS`.
+
+---
+
+## 🔑 Credenciais de Acesso para Testes e Demonstração
+
+Para facilitar a homologação e apresentação do projeto, o arquivo [`database/script.sql`](./database/script.sql) já realiza a carga inicial de um usuário de testes completo com todos os fluxos populados:
+
+| Usuário | E-mail | Senha | Função / Dados no Sistema |
+|---|---|---|---|
+| **Carlos Eduardo Mendes** | `carlos@planeat.com` | `planeat123` | **Conta Principal:** 4 receitas, cardápio semanal completo e lista de compras inteligente com checklist |
+| **Ana Souza** | `ana@planeat.com` | `planeat123` | **Conta Secundária:** Ideal para testar isolamento de dados entre usuários |
+
+### O que já vem pronto na conta do Carlos:
+* **4 Receitas Cadastradas:** *Frango Grelhado com Arroz Integral*, *Omelete Nutritiva de Legumes*, *Sopa Reconfortante de Feijão* e *Bowl Prático de Frango e Ovos*.
+* **1 Planejamento Semanal Ativo:** 10 refeições distribuídas ao longo da semana (Almoço e Jantar).
+* **1 Lista de Compras Inteligente:** Itens consolidados via query analítica SQL, com itens comprados e pendentes para demonstração do checklist interativo.
+* **Relatório de Desperdício Evitado:** Alta taxa de reaproveitamento de ingredientes (acima de 90%) visível diretamente no Dashboard.
+

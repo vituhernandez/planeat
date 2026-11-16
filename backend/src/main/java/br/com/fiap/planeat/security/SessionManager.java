@@ -29,7 +29,11 @@ public final class SessionManager {
     }
 
     public static SessionManager fromEnvironment() {
-        boolean secure = !"false".equalsIgnoreCase(System.getenv("COOKIE_SECURE"));
+        String secureVal = System.getenv("COOKIE_SECURE");
+        if (secureVal == null || secureVal.isBlank()) {
+            secureVal = System.getProperty("COOKIE_SECURE");
+        }
+        boolean secure = !"false".equalsIgnoreCase(secureVal);
         return new SessionManager(secure);
     }
 

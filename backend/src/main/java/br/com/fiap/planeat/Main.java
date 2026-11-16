@@ -1,5 +1,6 @@
 package br.com.fiap.planeat;
 
+import br.com.fiap.planeat.config.EnvLoader;
 import br.com.fiap.planeat.controller.IngredienteController;
 import br.com.fiap.planeat.controller.ListaComprasController;
 import br.com.fiap.planeat.controller.AutenticacaoController;
@@ -32,6 +33,9 @@ public class Main {
     private static HttpServer servidor;
 
     public static void main(String[] args) {
+        // Carrega configurações do arquivo .env, se existir
+        EnvLoader.carregar();
+
         System.out.println("==================================================================");
         System.out.println("🌿 PlanEat - Back-end Java (Global Solution FIAP 2026/2)");
         System.out.println("CitizenTech: Planejamento Alimentar e Combate ao Desperdício");
@@ -131,6 +135,9 @@ public class Main {
 
     private static int obterPortaConfigurada() {
         String envPort = System.getenv("PORT");
+        if (envPort == null || envPort.isBlank()) {
+            envPort = System.getProperty("PORT");
+        }
         if (envPort != null && !envPort.isBlank()) {
             try {
                 return Integer.parseInt(envPort.trim());
