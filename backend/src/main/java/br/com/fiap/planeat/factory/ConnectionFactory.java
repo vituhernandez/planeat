@@ -92,16 +92,20 @@ public class ConnectionFactory {
     }
 
     public static String getUrl() {
-        if (customUrl != null) return customUrl;
+        if (customUrl != null) return ajustarCaminhoScriptSeNecessario(customUrl);
         String env = System.getenv("DB_URL");
-        if (env != null && !env.isBlank()) return env;
-        return System.getProperty("db.url", DEFAULT_URL);
+        if (env != null && !env.isBlank()) return ajustarCaminhoScriptSeNecessario(env);
+        String prop = System.getProperty("DB_URL");
+        if (prop != null && !prop.isBlank()) return ajustarCaminhoScriptSeNecessario(prop);
+        return ajustarCaminhoScriptSeNecessario(System.getProperty("db.url", DEFAULT_URL));
     }
 
     public static String getUser() {
         if (customUser != null) return customUser;
         String env = System.getenv("DB_USER");
         if (env != null && !env.isBlank()) return env;
+        String prop = System.getProperty("DB_USER");
+        if (prop != null && !prop.isBlank()) return prop;
         return System.getProperty("db.user", DEFAULT_USER);
     }
 
@@ -112,7 +116,22 @@ public class ConnectionFactory {
             env = System.getenv("DB_PASS");
         }
         if (env != null && !env.isBlank()) return env;
+        String prop = System.getProperty("DB_PASSWORD");
+        if (prop == null || prop.isBlank()) {
+            prop = System.getProperty("DB_PASS");
+        }
+        if (prop != null && !prop.isBlank()) return prop;
         return System.getProperty("db.pass", DEFAULT_PASS);
+    }
+
+    private static String ajustarCaminhoScriptSeNecessario(String url) {
+        if (url == null || !url.contains("script.sql")) return url;
+        if (java.nio.file.Files.exists(java.nio.file.Paths.get("database/script.sql"))) {
+            return url.replace("../database/script.sql", "./database/script.sql");
+        } else if (java.nio.file.Files.exists(java.nio.file.Paths.get("../database/script.sql"))) {
+            return url.replace("./database/script.sql", "../database/script.sql");
+        }
+        return url;
     }
 
     /**

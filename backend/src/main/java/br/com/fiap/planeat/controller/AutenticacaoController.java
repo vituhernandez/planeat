@@ -34,14 +34,15 @@ public class AutenticacaoController implements HttpHandler {
             HttpHelper.enviarErro(exchange, 403, "Requisição não autorizada.");
             return;
         }
+        String normalizedPath = path == null ? "" : path.replaceAll("/+$", "");
         try {
-            if ("/api/auth/cadastro".equals(path) && "POST".equalsIgnoreCase(method)) {
+            if ((normalizedPath.endsWith("/cadastro") || "/api/auth/cadastro".equals(normalizedPath)) && "POST".equalsIgnoreCase(method)) {
                 cadastrar(exchange);
-            } else if ("/api/auth/login".equals(path) && "POST".equalsIgnoreCase(method)) {
+            } else if ((normalizedPath.endsWith("/login") || "/api/auth/login".equals(normalizedPath)) && "POST".equalsIgnoreCase(method)) {
                 login(exchange);
-            } else if ("/api/auth/sessao".equals(path) && "GET".equalsIgnoreCase(method)) {
+            } else if ((normalizedPath.endsWith("/sessao") || "/api/auth/sessao".equals(normalizedPath)) && "GET".equalsIgnoreCase(method)) {
                 sessao(exchange);
-            } else if ("/api/auth/logout".equals(path) && "POST".equalsIgnoreCase(method)) {
+            } else if ((normalizedPath.endsWith("/logout") || "/api/auth/logout".equals(normalizedPath)) && "POST".equalsIgnoreCase(method)) {
                 sessions.clearSessionCookie(exchange);
                 exchange.sendResponseHeaders(204, -1);
                 exchange.close();

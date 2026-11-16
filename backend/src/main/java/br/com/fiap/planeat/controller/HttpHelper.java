@@ -76,6 +76,9 @@ public class HttpHelper {
     private static List<String> allowedOrigins() {
         String configured = System.getenv("CORS_ALLOWED_ORIGINS");
         if (configured == null || configured.isBlank()) {
+            configured = System.getProperty("CORS_ALLOWED_ORIGINS");
+        }
+        if (configured == null || configured.isBlank()) {
             return List.of("http://localhost:5173", "http://127.0.0.1:5173");
         }
         return Arrays.stream(configured.split(","))
