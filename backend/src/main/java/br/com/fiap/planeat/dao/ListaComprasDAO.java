@@ -141,11 +141,7 @@ public class ListaComprasDAO {
                 stmtDeleteAntigos.setLong(1, idLista);
                 stmtDeleteAntigos.executeUpdate();
             } else {
-                try {
-                    stmtCriaLista = conn.prepareStatement(SQL_INSERT_LISTA, new String[]{"ID_LISTA"});
-                } catch (Exception ex) {
-                    stmtCriaLista = conn.prepareStatement(SQL_INSERT_LISTA, Statement.RETURN_GENERATED_KEYS);
-                }
+                stmtCriaLista = ConnectionFactory.prepareInsert(conn, SQL_INSERT_LISTA, "ID_LISTA");
                 stmtCriaLista.setLong(1, planejamentoId);
                 stmtCriaLista.setDate(2, Date.valueOf(LocalDate.now()));
                 stmtCriaLista.setString(3, "PENDENTE");
@@ -160,7 +156,7 @@ public class ListaComprasDAO {
             }
 
             if (itens != null && !itens.isEmpty()) {
-                stmtInsereItem = conn.prepareStatement(SQL_INSERT_ITEM_LISTA, new String[]{"ID_ITEM_LISTA"});
+                stmtInsereItem = ConnectionFactory.prepareInsert(conn, SQL_INSERT_ITEM_LISTA, "ID_ITEM_LISTA");
                 for (ItemListaCompras item : itens) {
                     item.setListaId(idLista);
                     Long idIngrediente = item.getIngrediente() != null ? item.getIngrediente().getId() : null;

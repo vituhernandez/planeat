@@ -148,11 +148,7 @@ public class PlanejamentoDAO {
             autoCommitOriginal = conn.getAutoCommit();
             conn.setAutoCommit(false);
 
-            try {
-                stmtPlano = conn.prepareStatement(SQL_INSERT_PLANEJAMENTO, new String[]{"ID_PLANEJAMENTO"});
-            } catch (Exception ex) {
-                stmtPlano = conn.prepareStatement(SQL_INSERT_PLANEJAMENTO, Statement.RETURN_GENERATED_KEYS);
-            }
+            stmtPlano = ConnectionFactory.prepareInsert(conn, SQL_INSERT_PLANEJAMENTO, "ID_PLANEJAMENTO");
 
             Long usuarioId = plano.getUsuarioId() != null ? plano.getUsuarioId() :
                     (plano.getUsuario() != null ? plano.getUsuario().getId() : null);

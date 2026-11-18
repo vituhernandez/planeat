@@ -44,11 +44,7 @@ public class CategoriaDAO {
 
         try {
             conn = ConnectionFactory.getConnection();
-            try {
-                stmt = conn.prepareStatement(SQL_INSERT, new String[]{"ID_CATEGORIA"});
-            } catch (Exception ex) {
-                stmt = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
-            }
+            stmt = ConnectionFactory.prepareInsert(conn, SQL_INSERT, "ID_CATEGORIA");
 
             stmt.setString(1, categoria.getNome());
             stmt.executeUpdate();

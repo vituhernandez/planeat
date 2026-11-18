@@ -59,11 +59,7 @@ public class IngredienteDAO {
 
         try {
             conn = ConnectionFactory.getConnection();
-            try {
-                stmt = conn.prepareStatement(SQL_INSERT, new String[]{"ID_INGREDIENTE"});
-            } catch (Exception ex) {
-                stmt = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
-            }
+            stmt = ConnectionFactory.prepareInsert(conn, SQL_INSERT, "ID_INGREDIENTE");
 
             stmt.setString(1, ingrediente.getNome());
             Long catId = ingrediente.getCategoria() != null ? ingrediente.getCategoria().getId() : null;

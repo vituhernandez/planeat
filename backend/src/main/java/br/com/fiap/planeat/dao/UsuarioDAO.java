@@ -48,11 +48,7 @@ public class UsuarioDAO {
 
         try {
             conn = ConnectionFactory.getConnection();
-            try {
-                stmt = conn.prepareStatement(SQL_INSERT, new String[]{"ID_USUARIO"});
-            } catch (Exception ex) {
-                stmt = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
-            }
+            stmt = ConnectionFactory.prepareInsert(conn, SQL_INSERT, "ID_USUARIO");
 
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());

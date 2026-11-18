@@ -112,11 +112,7 @@ public class ReceitaDAO {
             autoCommitOriginal = conn.getAutoCommit();
             conn.setAutoCommit(false);
 
-            try {
-                stmtReceita = conn.prepareStatement(SQL_INSERT_RECEITA, new String[]{"ID_RECEITA"});
-            } catch (Exception ex) {
-                stmtReceita = conn.prepareStatement(SQL_INSERT_RECEITA, Statement.RETURN_GENERATED_KEYS);
-            }
+            stmtReceita = ConnectionFactory.prepareInsert(conn, SQL_INSERT_RECEITA, "ID_RECEITA");
 
             Long usuarioId = receita.getUsuarioId() != null ? receita.getUsuarioId() :
                     (receita.getUsuario() != null ? receita.getUsuario().getId() : null);

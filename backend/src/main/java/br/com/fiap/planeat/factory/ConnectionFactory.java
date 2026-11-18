@@ -2,7 +2,10 @@ package br.com.fiap.planeat.factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -132,6 +135,30 @@ public class ConnectionFactory {
             return url.replace("./database/script.sql", "../database/script.sql");
         }
         return url;
+    }
+
+    /**
+     * Prepara um INSERT com recuperação compatível da chave primária gerada
+     * em PostgreSQL (minúsculas), Oracle (maiúsculas) e H2.
+     */
+    public static PreparedStatement prepareInsert(Connection conn, String sql, String pkColumn) throws SQLException {
+        String dbProduct = "";
+        try {
+            dbProduct = conn.getMetaData().getDatabaseProductName();
+        } catch (SQLException ignored) {
+        }
+        String normalized = dbProduct != null ? dbProduct.toLowerCase(Locale.ROOT) : "";
+        if (normalized.contains("postgresql")) {
+            return conn.prepareStatement(sql, new String[]{pkColumn.toLowerCase(Locale.ROOT)});
+        }
+        if (normalized.contains("oracle")) {
+            return conn.prepareStatement(sql, new String[]{pkColumn.toUpperCase(Locale.ROOT)});
+        }
+        try {
+            return conn.prepareStatement(sql, new String[]{pkColumn});
+        } catch (Exception ex) {
+            return conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        }
     }
 
     /**
